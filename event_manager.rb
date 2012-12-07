@@ -144,9 +144,11 @@ end
                     end
                     
             end
-            state_data = state_data.select{|state, counter| state}.sort_by{|state, counter| state unless state.nil?}
+            ranks = state_data.sort_by{|state, counter| -counter}.collect{|state, counter| state}
+            state_data = state_data.select{|state, counter| state}.sort_by{|state, counter| state}
+
             state_data.each do |state, counter|
-              puts "#{state}: #{counter}"
+              puts "#{state}:\t#{counter}\t(#{ranks.index(state) + 1})"
             end
           
         end
